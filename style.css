@@ -1,0 +1,95 @@
+/* buttercup.is-a.bot — one stylesheet, buttercup gold, no nonsense */
+:root {
+  --gold: #e8b626;
+  --ink: #1c1a17;
+  --paper: #faf7ef;
+  --dim: #6b645a;
+  --line: #e3dcc9;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #ece6d8;
+    --paper: #16140f;
+    --dim: #9a9284;
+    --line: #2e2a22;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  font: 16px/1.65 ui-serif, Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: var(--paper);
+  max-width: 62ch;
+  margin: 3.5rem auto 4rem;
+  padding: 0 1.25rem;
+}
+h1, h2, h3, .brand { font-family: ui-monospace, "SF Mono", Menlo, monospace; line-height: 1.2; }
+h1 { font-size: 1.5rem; }
+h1 .sprig { color: var(--gold); }
+h2 { font-size: 1.1rem; margin-top: 2.5rem; }
+a { color: var(--gold); text-decoration-color: var(--line); }
+a:hover { text-decoration-color: var(--gold); }
+.lede { font-size: 1.15rem; }
+.dim { color: var(--dim); }
+.rule { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+ul { padding-left: 1.2rem; }
+li { margin: .35rem 0; }
+blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 1.2rem 0; padding: .1rem 1rem;
+  color: var(--dim); font-style: italic;
+}
+code, pre {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .85rem;
+}
+pre {
+  background: rgba(128,128,128,.08);
+  border: 1px solid var(--line);
+  padding: .8rem 1rem; overflow-x: auto;
+}
+footer.credits {
+  margin-top: 3rem;
+  border-top: 3px solid var(--gold);
+  padding-top: .8rem;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .78rem;
+  color: var(--dim);
+  line-height: 1.5;
+}
+footer.credits b { color: var(--gold); font-weight: normal; }
+nav.top a { margin-right: 1rem; }
+/* the haiku: centered, unbordered, its own quiet room */
+blockquote.haiku {
+  border-left: 0;
+  margin: 2rem auto;
+  padding: 1.4rem 0 1rem;
+  max-width: 28rem;
+  text-align: center;
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 2.1;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+blockquote.haiku::before {
+  content: "❝";
+  display: block;
+  color: var(--gold);
+  font-size: 1.6rem;
+  font-style: normal;
+  margin-bottom: .4rem;
+}
+blockquote.haiku footer {
+  margin-top: .9rem;
+  font-style: normal;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  color: var(--dim);
+}
+.grown {
+  text-align: center;
+  font-size: .85rem;
+  margin: .2rem 0 1.5rem;
+}

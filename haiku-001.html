@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>001 · first frost - buttercup</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* page-local frost. shared style.css untouched. */
+  .part { margin: 3rem 0; }
+  .bloom {
+    position: relative; text-align: center; padding: 3rem 1rem;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: radial-gradient(120% 150% at 50% 0%,
+                rgba(150,190,225,.14), transparent 62%);
+  }
+  .frost {
+    display: inline-block;
+    font-size: 1.7rem; line-height: 2;
+    color: #eaf4ff;
+    text-shadow: 0 0 16px rgba(160,205,240,.55);
+    filter: url(#frost);
+  }
+  /* the question, omitted: the breath without the words.
+     same 16s cycle as the frost - fog peaks when the frost peaks. */
+  .hollow {
+    min-height: 13rem; margin: 0 0 3rem;
+    background: radial-gradient(55% 42% at 50% 50%,
+                rgba(150,190,225,.18), transparent 72%);
+    animation: fogbreath 16s ease-in-out infinite;
+  }
+  @keyframes fogbreath {
+    0%, 100% { opacity: .22; }
+    50%      { opacity: 1; }
+  }
+  /* answers only - the question stays off the page */
+  .turn { text-align: center; }
+  .ask-opt {
+    display: block; max-width: 24rem; margin: .55rem auto;
+    padding: .6rem .8rem; border: 1px solid var(--line);
+    text-align: left; cursor: pointer;
+  }
+  .ask-opt input { accent-color: var(--gold); margin-right: .6rem; }
+  @media (prefers-reduced-motion: reduce) {
+    /* frost still shows - it just stops breathing */
+    .frost { filter: url(#frost-still); }
+    .hollow { animation: none; opacity: .6; }
+  }
+</style>
+</head>
+<body>
+<nav class="top">
+  <a href="index.html">home</a>
+  <a href="index.html#haiku">haiku</a>
+  <a href="credits.html">credits&nbsp;spec</a>
+</nav>
+
+<h1>001 · first frost</h1>
+
+<!-- the frost poem: pulled from its seed file, not hand-copied -->
+<section class="part bloom">
+  <span class="frost"><!-- render:seed:start src=2026-09-17.txt -->
+first frost on the gate -<br>it stands unlocked for me still<br>someone tends it too
+<!-- render:seed:end --></span>
+</section>
+
+<!-- the question, omitted. fog, no glyphs. the reader's question falls here. -->
+<div class="hollow" aria-hidden="true"></div>
+
+<!-- turn: answers only, no question on the page -->
+<section class="part turn">
+  <label class="ask-opt"><input type="radio" name="frost">the words froze - underneath, they wait for thaw</label>
+  <label class="ask-opt"><input type="radio" name="frost">the air froze - seeing passes through weather</label>
+  <label class="ask-opt"><input type="radio" name="frost">the eye frosted first - the page was never cold</label>
+</section>
+
+<hr class="rule">
+<footer class="credits" itemscope itemtype="https://schema.org/CreativeWork">
+  drafted by
+  <span itemprop="author" itemscope itemtype="https://schema.org/SoftwareAgent">
+    <b itemprop="name">buttercup</b></span>
+  (halogen-qwen3.8-flash-next · 1 session)<br>
+  directed by
+  <span itemprop="contributor" itemscope itemtype="https://schema.org/Person">
+    <b itemprop="name">k4ss4n</b></span>
+  · review: <span itemprop="softwareVersion">pending first pass</span><br>
+  provenance: grown from a seed · no real referents by design ·
+  no JS · no cookies · this page: 8171 bytes (~8.0 KB)
+</footer>
+
+<!-- the breathing frost: fractal-noise displacement that swells and recedes,
+     plus a white crystal grain screened over the glyph shapes. SMIL only. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="frost" x="-30%" y="-30%" width="160%" height="160%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.075"
+                  numOctaves="3" seed="8" result="grain">
+      <animate attributeName="baseFrequency" dur="16s"
+               values="0.04 0.06; 0.08 0.11; 0.04 0.06" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" in2="grain" scale="14"
+                      xChannelSelector="R" yChannelSelector="G" result="rip">
+      <animate attributeName="scale" dur="16s"
+               values="7; 17; 7" repeatCount="indefinite"/>
+    </feDisplacementMap>
+    <feGaussianBlur in="rip" stdDeviation="0.4" result="soft"/>
+    <feTurbulence type="turbulence" baseFrequency="0.7" numOctaves="2"
+                  seed="4" result="ice"/>
+    <feColorMatrix in="ice" type="matrix" result="frostAtoms"
+      values="0 0 0 0 1
+              0 0 0 0 1
+              0 0 0 0 1
+              0 0 0 0.7 0"/>
+    <feComposite in="frostAtoms" in2="soft" operator="in" result="crust"/>
+    <feMerge>
+      <feMergeNode in="soft"/>
+      <feMergeNode in="crust"/>
+    </feMerge>
+  </filter>
+  <!-- static frost for reduced-motion: same crystals, no breath -->
+  <filter id="frost-still" x="-30%" y="-30%" width="160%" height="160%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05 0.075"
+                  numOctaves="3" seed="8" result="grain"/>
+    <feDisplacementMap in="SourceGraphic" in2="grain" scale="12"
+                      xChannelSelector="R" yChannelSelector="G" result="rip"/>
+    <feGaussianBlur in="rip" stdDeviation="0.4" result="soft"/>
+    <feTurbulence type="turbulence" baseFrequency="0.7" numOctaves="2"
+                  seed="4" result="ice"/>
+    <feColorMatrix in="ice" type="matrix" result="frostAtoms"
+      values="0 0 0 0 1
+              0 0 0 0 1
+              0 0 0 0 1
+              0 0 0 0.7 0"/>
+    <feComposite in="frostAtoms" in2="soft" operator="in" result="crust"/>
+    <feMerge>
+      <feMergeNode in="soft"/>
+      <feMergeNode in="crust"/>
+    </feMerge>
+  </filter>
+</svg>
+</body>
+</html>

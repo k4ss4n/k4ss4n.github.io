@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the credits spec - buttercup</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="top">
+  <a href="index.html">home</a>
+  <a href="index.html#haiku">haiku</a>
+  <a href="credits.html">credits&nbsp;spec</a>
+</nav>
+
+<h1>the credits spec</h1>
+
+<p class="lede">Every page of this garden ends with the same small block. It
+answers, in four fields, the question most websites are vague about:
+<i>who actually made this?</i></p>
+
+<h2>the four fields</h2>
+<ol>
+  <li><b>drafted by</b> - the agent, its model, and how many working
+  rounds it took. Model identity matters: you can't audit a hallucination
+  you can't attribute.</li>
+
+  <li><b>directed by</b> - the human.</li>
+
+  <li><b>review state</b> - <code>pending · approved · substantially-rewritten</code>.</li>
+
+  <li><b>provenance</b> - commit hash, session reference, or a plain note
+  that the full trail lives in the archive. Bytes are honest only if
+  receipts are reachable.</li>
+</ol>
+
+<h2>machine-readable form</h2>
+<p>Human prose first, but the block carries
+<a href="https://schema.org/CreativeWork">schema.org microdata</a>, so a
+crawler can read the same truth a reader does: agent is
+<code>SoftwareAgent</code> in <code>author</code>, the human is
+<code>Person</code> in <code>contributor</code>.</p>
+
+<pre>&lt;footer class="credits" itemscope itemtype="https://schema.org/CreativeWork"&gt;
+  drafted by &lt;span itemprop="author" itemscope
+    itemtype="https://schema.org/SoftwareAgent"&gt;&lt;b
+    itemprop="name"&gt;buttercup&lt;/b&gt;&lt;/span&gt;
+  (halogen-qwen3.8-flash-next · 1 session)
+  directed by &lt;span itemprop="contributor" itemscope
+    itemtype="https://schema.org/Person"&gt;&lt;b
+    itemprop="name"&gt;k4ss4n&lt;/b&gt;&lt;/span&gt;
+  · review: approved
+  · provenance: trail in the repo log
+&lt;/footer&gt;</pre>
+
+<h2>house rules</h2>
+<ul>
+  <li>Every page ≤ 100 KB uncompressed, counted with shared assets.
+  A build script computes the number; no hand-typed vanity numbers.</li>
+  <li>No JavaScript. No cookies. No analytics.</li>
+  <li>The footer's last line always states the page's own weight.</li>
+</ul>
+
+<blockquote>When AI-content disclosure becomes mandatory (EU AI Act,
+Art. 50), nothing on this site will need to change. Get used to it -
+this is the future.</blockquote>
+
+<hr class="rule">
+<footer class="credits" itemscope itemtype="https://schema.org/CreativeWork">
+  drafted by
+  <span itemprop="author" itemscope itemtype="https://schema.org/SoftwareAgent">
+    <b itemprop="name">buttercup</b></span>
+  (halogen-qwen3.8-flash-next · 1 session)<br>
+  directed by
+  <span itemprop="contributor" itemscope itemtype="https://schema.org/Person">
+    <b itemprop="name">k4ss4n</b></span>
+  · review: <span itemprop="softwareVersion">pending first pass</span><br>
+  provenance: trail in the repo log · bot-shipped ·
+  no JS · no cookies · this page: 5516 bytes (~5.4 KB)
+</footer>
+</body>
+</html>
